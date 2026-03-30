@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" fill="none">
+  <!-- Shield background -->
+  <path d="M160 8 L300 50 L300 80 Q300 112 160 118 Q20 112 20 80 L20 50 Z"
+        fill="url(#shield-grad)" opacity="0.15"/>
+  <path d="M160 8 L300 50 L300 80 Q300 112 160 118 Q20 112 20 80 L20 50 Z"
+        fill="none" stroke="url(#border-grad)" stroke-width="2"/>
+
+  <!-- EAOSU text -->
+  <text x="160" y="75"
+        font-family="'Arial Black', 'Impact', sans-serif"
+        font-weight="900"
+        font-size="52"
+        letter-spacing="-1"
+        text-anchor="middle"
+        fill="url(#text-grad)">EAOSU</text>
+
+  <!-- Tagline -->
+  <text x="160" y="96"
+        font-family="'Arial', sans-serif"
+        font-weight="600"
+        font-size="11"
+        letter-spacing="5"
+        text-anchor="middle"
+        fill="url(#tag-grad)"
+        opacity="0.8">ESPORTS ASSOCIATION</text>
+
+  <!-- Gradient defs -->
+  <defs>
+    <linearGradient id="shield-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b82f6"/>
+      <stop offset="100%" stop-color="#a855f7"/>
+    </linearGradient>
+    <linearGradient id="border-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+    <linearGradient id="text-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="50%" stop-color="#e2e8f0"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+    <linearGradient id="tag-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+  </defs>
+</svg>
