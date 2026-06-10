@@ -9,16 +9,20 @@ class MyHeader extends HTMLElement {
                 </a>
                 <nav class="menu" aria-label="Main">
                     <a href="/">Home</a>
-                    <a href="about">About</a>
-                    <a href="schedule">Events</a>
-                    <a href="teams">Teams</a>
+                    <a href="/about">About</a>
+                    <a href="/schedule">Events</a>
+                    <a href="/teams">Teams</a>
                 </nav>
                 </div>
             </header>
         `;
 
         // Highlight the current page in the nav
-        const current = location.pathname.split('/').pop() || 'index.html';
+        let current = location.pathname;
+        // Normalize: "/join/" and "/join" both match href="/join"
+        if (current.endsWith('/') && current !== '/') current = current.slice(0, -1);
+        if (current === '') current = '/';
+
         this.querySelectorAll('.menu a').forEach(a => {
             if (a.getAttribute('href') === current) a.classList.add('active');
         });
@@ -39,9 +43,9 @@ class MyFooter extends HTMLElement {
                 </div>
                 <div class="foot-links">
                     <a href="/">Home</a>
-                    <a href="about">About</a>
-                    <a href="schedule">Events</a>
-                    <a href="teams">Teams</a>
+                    <a href="/about">About</a>
+                    <a href="/schedule">Events</a>
+                    <a href="/teams">Teams</a>
                     <a href="https://discord.com/invite/2e487waHAx" onclick="">Discord</a>
                     <a href="https://www.twitch.tv/esportsatosu" onclick="">Twitch</a>
                 </div>
