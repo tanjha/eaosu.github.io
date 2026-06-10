@@ -4,14 +4,14 @@ class MyHeader extends HTMLElement {
             <header>
                 <div class="wrap nav">
                 <a class="brand" href="index.html">
-                    <img class="brand-mark" src="EAOSULOGO.png" alt="Esports at Oregon State University logo">
+                    <img class="brand-mark" src="/EAOSULOGO.png" alt="Esports at Oregon State University logo">
                     <span class="brand-name">Esports<small>at Oregon State</small></span>
                 </a>
                 <nav class="menu" aria-label="Main">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="events.html">Events</a>
-                    <a href="teams.html">Teams</a>
+                    <a href="/">Home</a>
+                    <a href="about">About</a>
+                    <a href="schedule">Events</a>
+                    <a href="teams">Teams</a>
                 </nav>
                 </div>
             </header>
@@ -31,19 +31,19 @@ class MyFooter extends HTMLElement {
             <footer>
                 <div class="wrap foot">
                 <div>
-                    <a class="brand" href="index.html">
-                    <img class="brand-mark" src="EAOSULOGO.png" alt="Esports at Oregon State University logo">
+                    <a class="brand" href="/index.html">
+                    <img class="brand-mark" src="/EAOSULOGO.png" alt="Esports at Oregon State University logo">
                     <span class="brand-name">Esports<small>at Oregon State</small></span>
                     </a>
                     <small>A registered student organization at Oregon State University.<br>Corvallis, Oregon · Go Beavs.</small>
                 </div>
                 <div class="foot-links">
-                    <a href="index.html">Home</a>
-                    <a href="about.html">About</a>
-                    <a href="events.html">Events</a>
-                    <a href="teams.html">Teams</a>
+                    <a href="/">Home</a>
+                    <a href="about">About</a>
+                    <a href="schedule">Events</a>
+                    <a href="teams">Teams</a>
                     <a href="https://discord.com/invite/2e487waHAx" onclick="">Discord</a>
-                    <a href="https://www.twitch.tv/esportsatosu" onclick="return false">Twitch</a>
+                    <a href="https://www.twitch.tv/esportsatosu" onclick="">Twitch</a>
                 </div>
                 </div>
             </footer>
