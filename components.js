@@ -39,7 +39,7 @@ class MyFooter extends HTMLElement {
                     <img class="brand-mark" src="/EAOSULOGO.png" alt="Esports at Oregon State University logo">
                     <span class="brand-name">Esports<small>at Oregon State</small></span>
                     </a>
-                    <small>A registered student organization at Oregon State University.<br>Corvallis, Oregon · Go Beavs.</small>
+                    <small>A registered student organization at Oregon State University.<br>Corvallis, Oregon</small>
                 </div>
                 <div class="foot-links">
                     <a href="/">Home</a>
