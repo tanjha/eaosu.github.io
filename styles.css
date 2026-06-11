@@ -701,6 +701,16 @@ nav.menu {
   border-bottom: 3px solid var(--orange);
 }
 
+.team-card-roster {
+  background: var(--black);
+  color: var(--bone);
+  padding: 22px 24px;
+  display: flex;
+  align-items: right;
+  gap: 16px;
+  border-bottom: 3px solid var(--orange);
+}
+
 .team-badge {
   width: 50px;
   height: 50px;
@@ -730,6 +740,13 @@ nav.menu {
 
 .team-body {
   padding: 22px 24px 26px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px
+}
+
+.team-footer {
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -843,35 +860,27 @@ footer {
 }
 
 /* ============ TEAM-CARD LINK ============ */
-a.team-card-link {
+.team-card-link {
   text-decoration: none;
   color: inherit;
   display: block;
-  position: relative
+  position: relative;
+  -webkit-user-drag: none;
+  /* stop the link-drag behavior */
+  user-select: text;
+  /* explicitly allow selecting text */
 }
 
-a.team-card-link .team-card {
+.team-card-link .team-card {
   transition: transform .2s, box-shadow .2s
 }
 
-a.team-card-link:hover .team-card {
+.team-card-link:hover .team-card {
   transform: translateY(-4px);
   box-shadow: 0 8px 28px rgba(0, 0, 0, .35)
 }
 
-a.team-card-link::after {
-  content: "→";
-  position: absolute;
-  bottom: 18px;
-  right: 22px;
-  font: 700 16px/1 var(--hud);
-  color: var(--orange);
-  opacity: 0;
-  transition: opacity .2s, transform .2s;
-  transform: translateX(-6px);
-}
-
-a.team-card-link:hover::after {
+.team-card-link:hover::after {
   opacity: 1;
   transform: translateX(0)
 }
