@@ -1075,7 +1075,7 @@ footer {
 }
 
 .player-card {
-  background: var(--ink);
+  background: var(--sand);
   border: 1px solid var(--line);
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%);
   overflow: hidden;
@@ -1131,6 +1131,7 @@ footer {
   font: 800 17px/1.2 var(--display);
   font-style: italic;
   text-transform: uppercase;
+  color: var(--black);
 }
 
 .player-card-body .pc-rank {
@@ -1141,7 +1142,7 @@ footer {
   font: 600 11px/1 var(--hud);
   letter-spacing: .12em;
   text-transform: uppercase;
-  color: var(--sand);
+  color: var(--ink);
 }
 
 .player-card-body .pc-rank img {
@@ -1152,9 +1153,9 @@ footer {
 
 .player-card-body .pc-fact {
   font: 500 12px/1.5 var(--hud);
-  color: var(--sand-deep);
+  color: var(--ink);
   margin-top: 10px;
-  border-top: 1px dashed var(--line);
+  border-top: 1px dashed var(--ink);
   padding-top: 10px;
   padding-right: 32px;
 }
@@ -1181,7 +1182,7 @@ footer {
 
 .pc-roles img.active {
   opacity: 1;
-  filter: grayscale(0%) brightness(1);
+  filter: grayscale(0%) brightness(0.2);
 }
 
 /* back link */
