@@ -28,6 +28,9 @@ export default ts.config(
 	},
 	{
 		files: ['**/*.svelte', '**/*.svelte.ts', '**/*.svelte.js'],
+		parserOptions: {
+			tsconfigRootDir: __dirname
+		},
 		languageOptions: {
 			parserOptions: {
 				projectService: true,
