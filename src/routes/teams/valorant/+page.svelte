@@ -64,43 +64,121 @@
 			<h2>Meet the Players</h2>
 
 			<!-- BLACK roster cards -->
-			<p class="roster-label" style="margin-top: 12px">Black - Varsity</p>
-			<div class="player-grid" style="margin-bottom: 48px">
-				<Player name="Coach: Zexsonn" fact="Hit Immortal in Episode 1" />
-
-				<Player name="Marine" fact="The IGL." rank="Immortal_3" Duelist Initiator />
-				<Player name="BOSSCK" fact="Started on the Club Team" rank="Immortal_2" Duelist Initiator />
+			<p class="roster-label" style="margin-top:12px">Black - Varsity</p>
+			<div class="player-grid" style="margin-bottom:48px">
 				<Player
+					name="Marine"
+					rank="Immortal_2"
+					fact="Highest HS% in Run it Back 2025"
+					Initiator
+					Controller
+				></Player>
+
+				<Player
+					rank="Immortal_2"
+					name="B0SSCK"
+					fact="Started on the Club Team. W Streamer"
+					Duelist
+					Controller
+				/>
+				<Player
+					rank="Immortal_3"
 					name="Vize"
 					fact="It sounds like the agent but with a Z. Shotguns are W"
-					rank="Immortal_1"
+					Duelist
 					Initiator
 					Controller
 					Sentinel
 				/>
+				<Player rank="Ascendant_3" name="Sae" fact="Refuses to play ranked" Initiator Sentinel />
 				<Player
-					name="Sae"
-					fact="He's been on Varsity since freshman year"
-					rank="Ascendant_3"
+					rank="Immortal_2"
+					name="Peptic"
+					fact="This is his first year at OSU"
+					Initiator
 					Sentinel
 				/>
-				<Player name="Peptic" fact="This is his first year at OSU" rank="Immortal_1" Initiator />
+				<Player rank="Immortal_2" name="Jin" fact="The Backup." Duelist Initiator />
+
+				<div class="player-card reveal">
+					<div class="player-photo"></div>
+					<div class="player-card-body">
+						<p class="pc-name">Zexsonn</p>
+						<p class="pc-rank">Coach</p>
+						<p class="pc-fact">Hit Immortal in Episode 1</p>
+					</div>
+				</div>
 			</div>
 
 			<!-- ORANGE roster cards -->
 			<p class="roster-label">Orange - Junior Varsity</p>
-			<div class="player-grid" style="margin-bottom: 48px">
-				<Player name="what" fact="w"></Player>
+			<div class="player-grid" style="margin-bottom:48px">
+				<Player rank="Immortal_2" name="Proven" fact="Proved" Initiator Controller />
+				<Player
+					rank="Ascendant_3"
+					name="Aether"
+					fact="Twitch.tv/aetherval. be there or be square"
+					Duelist
+					Controller
+				/>
+				<Player rank="Platinum_2" name="Froggeli" fact="&quot;heh..&quot;" Initiator Sentinel />
+				<Player rank="Platinum_2" name="tensi0n" fact="Great aim no brain" Sentinel />
+				<Player
+					rank="Immortal_3"
+					name="Hanzz"
+					fact="Definitely never queued comp and delayed an official..."
+					Initiator
+				/>
+				<div class="player-card reveal">
+					<div class="player-photo"></div>
+					<div class="player-card-body">
+						<p class="pc-name">Lyler</p>
+						<p class="pc-rank">Coach</p>
+						<p class="pc-fact">Prepare for trouble...</p>
+					</div>
+				</div>
+
+				<div class="player-card reveal">
+					<div class="player-photo"></div>
+					<div class="player-card-body">
+						<p class="pc-name">Uta</p>
+						<p class="pc-rank">Asst. Coach</p>
+						<p class="pc-fact">Also goes by Gulpin (like the Pokémon)</p>
+					</div>
+				</div>
 			</div>
 
 			<!-- WHITE roster cards -->
 			<p class="roster-label">White - Talent Development</p>
-			<div class="player-grid" style="margin-bottom: 48px"></div>
+			<div class="player-grid" style="margin-bottom:48px">
+				<Player rank="Diamond_3" name="Kyurem" fact="He's so cool" Initiator Controller />
+				<Player rank="Ascendant_3" name="Ducky" fact="NOT a Brim one trick" Controller />
+				<Player
+					rank="Platinum_1"
+					name="Serenity"
+					fact="Pavlov-ing my teammates, one flash at a time"
+					Initiator
+					Controller
+				/>
+				<Player rank="Platinum_2" name="himm" fact="Peep the name." Controller Sentinel />
+				<Player rank="Gold_1" name="Milkyways" fact="top frag?" Duelist />
+				<Player rank="Silver_3" name="Snowblizzard" fact="65 wouldn't fit on the card" Duelist />
+				<Player rank="Immortal_1" name="JPR" fact="Don't search up the premier team..." Initiator />
+
+				<div class="player-card reveal">
+					<div class="player-photo"></div>
+					<div class="player-card-body">
+						<p class="pc-name">Lyler</p>
+						<p class="pc-rank">Coach</p>
+						<p class="pc-fact">And make it double!</p>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
 	<!-- Bottom tryout CTA -->
-	<div class="section" style="padding-top: 0; padding-bottom: 72px">
+	<div class="section" style="padding-top:0;padding-bottom:72px">
 		<div class="wrap">
 			<div class="tryout-note reveal">
 				<div>
