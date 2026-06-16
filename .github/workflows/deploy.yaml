@@ -11,26 +11,18 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # If you're using pnpm, add this step then change the commands and cache key below to use `pnpm`
-      # - name: Install pnpm
-      #   uses: pnpm/action-setup@v3
-      #   with:
-      #     version: 8
-
-      - name: Install Node.js
-        uses: actions/setup-node@v4
+      - name: Install Deno
+        uses: denoland/setup-deno@v2
         with:
-          node-version: 20
-          cache: npm
+          deno-version: v2.x
 
       - name: Install dependencies
-        run: npm i
+        run: deno install
 
       - name: build
         env:
           BASE_PATH: '/${{ github.event.repository.name }}'
-        run: |
-          npm run build
+        run: deno task build
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
