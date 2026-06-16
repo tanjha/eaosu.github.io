@@ -25,7 +25,7 @@
 					src={'/assets/ValorantImages/Ranks/' + rank + '_Rank.webp'}
 					alt={rank.replace('_', ' ')}
 				/>
-				Immortal 3
+				{rank.replace('_', ' ')}
 			</p>
 		{/if}
 		{#if roles}
