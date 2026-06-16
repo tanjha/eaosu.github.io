@@ -17,7 +17,7 @@
 {/snippet}
 
 <header>
-	<div class="wrap nav">
+	<div class="wrap nav h-17">
 		<a class="brand" href="/">
 			<img class="brand-mark" src={icon} alt="Esports at Oregon State University logo" />
 			<span class="brand-name">Esports<small>at Oregon State</small></span>

@@ -31,7 +31,6 @@ body {
 	background: var(--black);
 	color: var(--bone);
 	font-family: var(--display);
-	font-size: 16px;
 	line-height: 1.55;
 	-webkit-font-smoothing: antialiased;
 }
@@ -79,7 +78,6 @@ header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	height: 68px;
 }
 
 .brand {
@@ -90,22 +88,25 @@ header {
 }
 
 .brand-mark {
-	width: 42px;
-	height: 42px;
+	width: 2.5rem;
+	height: 2.5rem;
 	object-fit: contain;
 	display: block;
 }
 
 .brand-name {
-	font: 800 15px/1.1 var(--hud);
+	font: 800 1em/1.1 var(--hud);
+	line-height: 1;
 	letter-spacing: 0.08em;
 	text-transform: uppercase;
+	justify-items: center;
+	height: fit-content;
 }
 
 .brand-name small {
 	display: block;
 	font-weight: 500;
-	font-size: 10px;
+	font-size: 0.625rem;
 	color: var(--sand);
 	letter-spacing: 0.22em;
 }
@@ -116,7 +117,7 @@ nav.menu {
 }
 
 .menu a {
-	font: 600 12px/1 var(--hud);
+	font: 600 1em/1 var(--hud);
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	text-decoration: none;
@@ -183,7 +184,7 @@ nav.menu {
 
 /* ============ HERO (HOME) ============ */
 .hero {
-	padding: 84px 0 72px;
+	padding: 5.25em 0 72px;
 	position: relative;
 	overflow: hidden;
 }
@@ -819,8 +820,14 @@ nav.menu {
 /* ============ FOOTER ============ */
 footer {
 	border-top: 1px solid var(--line);
-	padding: 44px 0 56px;
 	background: var(--black);
+	height: fit-content;
+	padding-top: 2em;
+	padding-bottom: 2em;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	font-size: 0.8rem;
 }
 
 .foot {
@@ -829,10 +836,7 @@ footer {
 	gap: 28px;
 	flex-wrap: wrap;
 	align-items: flex-start;
-}
-
-.foot .brand-name {
-	font-size: 13px;
+	width: 100%;
 }
 
 .foot-links {
@@ -842,7 +846,7 @@ footer {
 }
 
 .foot-links a {
-	font: 600 11px/1 var(--hud);
+	font: 600 1em/1 var(--hud);
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--sand);
@@ -855,9 +859,8 @@ footer {
 
 .foot small {
 	display: block;
-	margin-top: 18px;
 	color: #6d6253;
-	font: 500 11px/1.6 var(--hud);
+	font: 500 0.9em/1.6 var(--hud);
 	letter-spacing: 0.06em;
 }
 

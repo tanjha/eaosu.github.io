@@ -1,2 +1,5 @@
 @plugin '@tailwindcss/typography';
 @import 'tailwindcss';
+@theme {
+	--spacing: 0.25rem;
+}
