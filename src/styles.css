@@ -1130,12 +1130,12 @@ footer {
 }
 
 .player-card-body {
-	padding: 16px 18px 20px;
+	padding: 1em 1.2em 1.8em;
 	position: relative;
 }
 
 .player-card-body .pc-name {
-	font: 800 17px/1.2 var(--display);
+	font: 800 1.1em/1.2 var(--display);
 	font-style: italic;
 	text-transform: uppercase;
 }
@@ -1144,26 +1144,24 @@ footer {
 	display: flex;
 	align-items: center;
 	gap: 6px;
-	margin-top: 8px;
-	font: 600 11px/1 var(--hud);
+	font: 100 0.8em/1 var(--hud);
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: var(--sand);
 }
 
 .player-card-body .pc-rank img {
-	width: 22px;
-	height: 22px;
+	width: 1.5em;
+	height: 1.5em;
 	object-fit: contain;
 }
 
 .player-card-body .pc-fact {
-	font: 500 12px/1.5 var(--hud);
+	font: 500 0.7em/1.5 var(--hud);
 	color: var(--sand-deep);
-	margin-top: 10px;
+	margin-top: 2em;
 	border-top: 1px dashed var(--line);
-	padding-top: 10px;
-	padding-right: 32px;
+	padding-top: 2em;
 }
 
 /* role icons — vertical column on right */
@@ -1198,12 +1196,12 @@ footer {
 	display: inline-flex;
 	align-items: center;
 	gap: 8px;
-	font: 600 12px/1 var(--hud);
+	font: 600 0.75em/1 var(--hud);
 	letter-spacing: 0.16em;
 	text-transform: uppercase;
 	color: var(--orange);
 	text-decoration: none;
-	margin-bottom: 24px;
+	margin-bottom: 2em;
 	transition: color 0.15s;
 }
 
