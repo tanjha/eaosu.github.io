@@ -1,0 +1,118 @@
+<script>
+	import Ticker from '../components/Ticker.svelte';
+</script>
+
+<svelte:head>
+	<title>Esports at Oregon State University</title>
+</svelte:head>
+
+<main>
+	<Ticker></Ticker>
+	<div class="hero">
+		<div class="wrap">
+			<p class="kicker">Student-run · Corvallis, OR</p>
+			<h1>Dam good<br />gaming<span class="accent">.</span></h1>
+			<p class="lede">
+				Esports at Oregon State University fields competitive rosters across nine titles and runs
+				one of the most active gaming communities in the Pacific Northwest. Varsity-level
+				competition, zero-pressure community nights, and everything in between.
+			</p>
+			<div class="cta-row">
+				<a class="btn btn-solid" href="/teams">Meet the teams</a>
+				<a class="btn btn-ghost" href="/schedule">View schedule</a>
+			</div>
+			<div class="next-match reveal">
+				<p class="label">Next Event</p>
+				<p class="matchup">Run It Back - Sponsored by XFINITY</p>
+				<p class="meta">Date to be announced · Streamed live on Twitch</p>
+			</div>
+		</div>
+	</div>
+
+	<div class="section sand grain">
+		<div class="wrap">
+			<div class="sec-head">
+				<h2>Nine titles, one club</h2>
+				<a class="more" href="/teams">All rosters →</a>
+			</div>
+			<div class="games">
+				<div class="game-chip reveal">
+					<p class="tag">Hero Shooter · 5v5</p>
+					<h3>Overwatch 2</h3>
+					<p class="roster-note">Three rosters · NACE Open</p>
+				</div>
+				<div class="game-chip reveal">
+					<p class="tag">Tactical · 5v5</p>
+					<h3>Valorant</h3>
+					<p class="roster-note">Three rosters · CVAL</p>
+				</div>
+				<div class="game-chip reveal">
+					<p class="tag">MOBA · 5v5</p>
+					<h3>League of Legends</h3>
+					<p class="roster-note">Two rosters · CLOL</p>
+				</div>
+				<div class="game-chip reveal">
+					<p class="tag">Sports · 3v3</p>
+					<h3>Rocket League</h3>
+					<p class="roster-note">Two rosters · CRL</p>
+				</div>
+				<div class="game-chip reveal">
+					<p class="tag">Tactical · 5v5</p>
+					<h3>Rainbow Six Siege</h3>
+					<p class="roster-note">One roster · CR6</p>
+				</div>
+				<div class="game-chip reveal">
+					<p class="tag">Horror · 4v1</p>
+					<h3>Dead by Daylight</h3>
+					<p class="roster-note">Two rosters · Events</p>
+				</div>
+				<div class="game-chip reveal">
+					<p class="tag">Tactical · 5v5</p>
+					<h3>Counter-Strike 2</h3>
+					<p class="roster-note">Two rosters</p>
+				</div>
+				<div class="game-chip reveal">
+					<p class="tag">Hero Shooter · 6v6</p>
+					<h3>Marvel Rivals</h3>
+					<p class="roster-note">One roster</p>
+				</div>
+				<div class="game-chip reveal">
+					<p class="tag">MOBA · 6v6</p>
+					<h3>Deadlock</h3>
+					<p class="roster-note">One roster</p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="section">
+		<div class="wrap">
+			<div class="sec-head">
+				<h2>Why OSU Esports</h2>
+			</div>
+			<div class="pillars">
+				<div class="pillar reveal">
+					<h3>Compete</h3>
+					<p>
+						Tryout-based rosters playing in NACE Starleague, Riot Collegiate, CRL, and regional
+						invitationals against schools across the West Coast.
+					</p>
+				</div>
+				<div class="pillar reveal">
+					<h3>Community</h3>
+					<p>
+						Open game nights, watch parties for OSU matches and pro events, and a Discord that never
+						sleeps. You don't need to try out, just show up!
+					</p>
+				</div>
+				<div class="pillar reveal">
+					<h3>Events &amp; media</h3>
+					<p>
+						Casting, production, social media, and event planning roles for students who want a
+						career in esports without going pro.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
