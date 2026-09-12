@@ -1,4 +1,4 @@
-﻿<script>
+<script>
 	import Player from './player.svelte';
 </script>
 
@@ -61,7 +61,7 @@
 	<div class="section player-grid-section">
 		<div class="wrap">
 			<p class="kicker">Rosters</p>
-			<h2>Meet the Players</h2>
+			<h2>Meet the Teams</h2>
 
 			<!-- BLACK roster cards -->
 			<p class="roster-label" style="margin-top:12px">Black - Varsity</p>
@@ -161,8 +161,8 @@
 					Controller
 				/>
 				<Player rank="Platinum_2" name="himm" fact="Peep the name." Controller Sentinel />
-				<Player rank="Gold_1" name="Milkyways" fact="top frag?" Duelist />
-				<Player rank="Silver_3" name="Snowblizzard" fact="65 wouldn't fit on the card" Duelist />
+				<Player rank="Gold_1" name="Milkyways" fact="Wait, I'm top frag?" Duelist />
+				<Player rank="Silver_3" name="Snowblizzard" fact="banned from premier" Duelist />
 				<Player rank="Immortal_1" name="JPR" fact="Don't search up the premier team..." Initiator />
 
 				<div class="player-card reveal">
