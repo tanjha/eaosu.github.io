@@ -13,7 +13,12 @@
 <!-- Tryout Banner -->
 <div class="tryout-banner">
 	<p>
-		Next Tryouts — <span class="date-highlight">Fall 2026</span> · Exact Date TBD · Watch Discord Announcements
+		Next Tryouts: <span class="date-highlight">September 27, 2026 — 7:30 P.M.</span> — <a
+			href="https://forms.gle/6gF2K9r39qTBag9C7"
+			target="_blank"
+			rel="noopener noreferrer"
+			style="text-decoration: underline;">Tryout Application Form</a
+		> — <a href="#tryout-info" style="text-decoration: underline;">More Information</a>
 	</p>
 </div>
 
@@ -52,8 +57,45 @@
 			</p>
 			<p>
 				Send any questions to your handsome and impressive Valorant Game Coordinator: @teamkyr on
-				discord
+				discord and bharadam@oregonstate.edu via email.
 			</p>
+		</div>
+	</div>
+	<div id="tryout-info" class="section player-grid-section">
+		<div class="wrap">
+			<p class="kicker">Tryouts</p>
+			<h2>Tryout Information</h2>
+		</div>
+	</div>
+	<div class="section info-section">
+		<div class="wrap">
+			<p>Hey, everyone! It's the time you've all been waiting for!</p>
+			<p>
+				Valorant Tryouts will be on September 27, followed by interviews from the 28th until
+				October 2
+			</p>
+			<p>
+				Tryouts will be held in two phases, gameplay and interview. The Gameplay Phase will be a 5v5
+				Trial on September 27th at 7:30 p.m. In the next phase, you will have an interview during
+				the following week (Sep 28-Oct 2).
+			</p>
+			<p>
+				Please make sure to have downloaded and set up: Valorant, OBS (or another recording
+				software), and Discord before the 27th.
+			</p>
+			<p>
+				You MUST fill out this form to participate: <a
+					href="https://forms.gle/6gF2K9r39qTBag9C7"
+					target="_blank"
+					rel="noopener noreferrer"
+					style="text-decoration: underline;">Tryout Application Form</a
+				>
+			</p>
+			<p>
+				As always with Valorant-Related Events, direct any questions towards your Valorant Game
+				Coordinator (info above)
+			</p>
+			<p>Looking forward to seeing you there!</p>
 		</div>
 	</div>
 
