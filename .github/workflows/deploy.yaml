@@ -3,10 +3,17 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: 'main'
+  workflow_run:
+    workflows: ['Sync Discord Events']
+    types:
+      - completed
+    branches: 'main'
+  workflow_dispatch:
 
 jobs:
   build_site:
     runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
