@@ -26,7 +26,7 @@ jobs:
           deno-version: v2.x
 
       - name: Fetch Discord Events
-        run: deno run --allow-net --allow-read --allow-write --allow-env scripts/sync-discord-events.ts
+        run: deno run --no-lock --allow-net --allow-read --allow-write --allow-env scripts/sync-discord-events.ts
         env:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
@@ -35,11 +35,12 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git status --short
           git add src/lib/data/events.json
           if git diff --staged --quiet; then
             echo "No changes in scheduled events."
           else
             git commit -m "chore(events): sync events from Discord"
-            git pull --rebase origin main
+            git pull --rebase --autostash origin main
             git push origin main
           fi
