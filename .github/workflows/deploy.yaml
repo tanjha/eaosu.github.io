@@ -3,17 +3,19 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: 'main'
-  workflow_run:
-    workflows: ['Sync Discord Events']
-    types:
-      - completed
-    branches: 'main'
+  schedule:
+    # Rebuild every 6 hours (00:00, 06:00, 12:00, 18:00 UTC) to pick up new Discord events
+    - cron: '0 */6 * * *'
   workflow_dispatch:
+
+# Don't let a scheduled rebuild and a push deploy at the same time
+concurrency:
+  group: pages
+  cancel-in-progress: false
 
 jobs:
   build_site:
     runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -25,6 +27,15 @@ jobs:
 
       - name: Install dependencies
         run: deno install
+
+      # Fetches Discord scheduled events into src/lib/data/events.json for this build only.
+      # Nothing is committed. If secrets are missing or Discord is unreachable, the script
+      # keeps the committed events.json, so the build still succeeds.
+      - name: Sync Discord events
+        run: deno run --no-lock --allow-net --allow-read --allow-write --allow-env scripts/sync-discord-events.ts
+        env:
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
 
       - name: build
         run: deno task build

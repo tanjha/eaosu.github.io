@@ -15,15 +15,12 @@ flowchart TD
     end
 
     subgraph CI["GitHub Actions"]
-        CRON[Cron Schedule: Every 6 Hours\nor Workflow Dispatch]
-        SYNC[sync-events.yaml\nscripts/sync-discord-events.ts]
-        DIFF{Events Changed?}
-        COMMIT[Commit & Push\nsrc/lib/data/events.json to main]
-        DEPLOY[deploy.yaml\nworkflow_run trigger]
+        CRON[deploy.yaml triggers\nPush to main, Cron every 6 Hours,\nor Workflow Dispatch]
+        SYNC[Sync step\nscripts/sync-discord-events.ts]
     end
 
     subgraph Repo["Repository & Build"]
-        DATA[(src/lib/data/events.json\nSingle Source of Truth)]
+        DATA[(src/lib/data/events.json\nCommitted copy = fallback only)]
         BUILD[Deno / Vite Build\n@sveltejs/adapter-static]
         PAGES[GitHub Pages Deployment]
     end
@@ -36,13 +33,8 @@ flowchart TD
 
     DE -->|Discord REST API v10| SYNC
     CRON --> SYNC
-    SYNC --> DIFF
-    DIFF -- Yes --> COMMIT
-    DIFF -- No --> NOOP[Skip commit / No deploy]
-    COMMIT --> DATA
-    COMMIT --> DEPLOY
-    DEPLOY --> BUILD
-    DATA --> BUILD
+    DATA -->|used if Discord unreachable| SYNC
+    SYNC -->|events.json in build workspace| BUILD
     BUILD --> PAGES
     PAGES --> SCHED
     PAGES --> TICK
@@ -84,7 +76,7 @@ The ingestion script is a zero-dependency script designed to run natively on bot
    - **Daylight Saving Time (DST) Resilience**: Date shifts are calculated on local calendar components rather than raw milliseconds, ensuring a 7:00 PM event remains at 7:00 PM Pacific Time across November/March DST transitions.
    - **Cancellation Exceptions**: Inspects `guild_scheduled_event_exceptions` to omit any occurrences explicitly canceled (`is_canceled: true`) in Discord.
 6. **Change Detection & Zero Churn**:
-   - Compares candidate output against existing file contents. If event IDs, timestamps, and metadata have not changed, the file is not written. This prevents automated commit churn every 6 hours and saves GitHub Actions build minutes.
+   - Compares candidate output against existing file contents. If event IDs, timestamps, and metadata have not changed, the file is not written. (The sync now runs at build time and never commits, so this only matters for local runs.)
 7. **Offline Safety**:
    - If secrets are absent or the Discord API is unreachable, existing data is preserved without failing the script or build.
 
@@ -92,7 +84,7 @@ The ingestion script is a zero-dependency script designed to run natively on bot
 
 ### 3.2. Data Schema (`src/lib/data/events.json`)
 
-The single source of truth committed to Git:
+Generated fresh during every deploy build. The copy committed to Git is **not** updated automatically; it is only a fallback for local development and for builds where Discord can't be reached.
 
 ```typescript
 interface ProcessedEvent {
@@ -123,24 +115,16 @@ interface OutputData {
 
 ### 3.3. GitHub Actions CI/CD Pipeline
 
-#### 1. Event Synchronizer (`.github/workflows/sync-events.yaml`)
-* **Triggers**:
-  - `schedule`: Runs at `00:00`, `06:00`, `12:00`, `18:00` UTC daily.
-  - `workflow_dispatch`: Manual trigger via GitHub UI.
-* **Permissions**: `contents: write` (to push commits).
-* **Execution**: Runs `scripts/sync-discord-events.ts` under Deno v2.
-* **Auto-Commit**:
-  - Runs `git diff --staged --quiet` on `src/lib/data/events.json`.
-  - If modified, commits via `github-actions[bot]` with rebase protection (`git pull --rebase origin main`) and pushes to `main`.
-
-#### 2. Pages Deployment (`.github/workflows/deploy.yaml`)
+#### Pages Deployment with Build-Time Sync (`.github/workflows/deploy.yaml`)
 * **Triggers**:
   - `push` to `main`.
-  - `workflow_run`: Chained automatically to run whenever `Sync Discord Events` finishes on `main`.
-  - `workflow_dispatch`: Manual rebuilds.
-* **Condition**:
-  `if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}`
-  Ensures broken sync attempts do not trigger deployments.
+  - `schedule`: Runs at `00:00`, `06:00`, `12:00`, `18:00` UTC daily so new Discord events appear without a code change.
+  - `workflow_dispatch`: Manual rebuilds (use this to pull in new events immediately).
+* **Sync step**: Before `deno task build`, runs `deno run --no-lock ... scripts/sync-discord-events.ts` with the `DISCORD_BOT_TOKEN` and `DISCORD_GUILD_ID` secrets. The result is written into the build workspace only.
+* **No commits**: `main` is protected by a ruleset that requires pull requests, and the workflow's `GITHUB_TOKEN` can't bypass it. Fetching at build time avoids pushing entirely, so no write permission or bypass token is needed.
+* **Concurrency**: `group: pages` keeps a scheduled rebuild and a push deploy from running at the same time.
+
+> An earlier design used a separate `sync-events.yaml` workflow that committed `events.json` to `main`. It was removed because those pushes were rejected by the branch ruleset.
 
 ---
 
@@ -169,8 +153,7 @@ interface OutputData {
 | :--- | :--- |
 | `scripts/sync-discord-events.ts` | Created Discord fetcher with recurrence expansion, DST protection, game regex, and change detection. |
 | `scripts/tsconfig.json` | Dedicated TypeScript configuration for Node scripts, eliminating IDE errors. |
-| `.github/workflows/sync-events.yaml` | Created scheduled 6-hour cron sync workflow with rebase protection. |
-| `.github/workflows/deploy.yaml` | Added `workflow_run` and `workflow_dispatch` triggers with conclusion checks. |
+| `.github/workflows/deploy.yaml` | Runs the Discord sync at build time; added 6-hour `schedule` and `workflow_dispatch` triggers. (The separate `sync-events.yaml` was removed.) |
 | `src/lib/data/events.json` | Created data file initialized with fallback events. |
 | `src/routes/schedule/+page.svelte` | Rewritten with Svelte 5 runes, responsive category tabs, week grouping, and empty state. |
 | `src/components/Ticker.svelte` | Converted to dynamic data with loop length guarantees and fixed invalid HTML attributes. |
@@ -198,14 +181,12 @@ In your GitHub repository settings (**Settings** → **Secrets and variables** �
    *(From Discord Developer Portal -> Bot -> Token)*
 2. Add Secret: `DISCORD_GUILD_ID`
    *(Right-click EAOSU Discord server -> Copy Server ID)*
-3. Enable Permissions:
-   - Go to **Settings** → **Actions** → **General** → **Workflow permissions**.
-   - Select **Read and write permissions**.
+   No extra workflow write permissions are needed; the deploy workflow never pushes.
 
 ### Step 3: Open Pull Request & Merge
 Create a PR from `populating-events` into `main` and merge.
 
 ### Step 4: Run Initial Test
 1. Go to **Actions** in GitHub.
-2. Select **Sync Discord Events** and click **Run workflow**.
-3. Verify that `src/lib/data/events.json` is updated with your live Discord events, and that `Deploy to GitHub Pages` triggers immediately after.
+2. Select **Deploy to GitHub Pages** and click **Run workflow**.
+3. In the **Sync Discord events** step log, check for `Retrieved N raw events from Discord.` and confirm the deployed `/schedule` page shows your live events. (`src/lib/data/events.json` in the repo is intentionally left unchanged.)
