@@ -1,32 +1,71 @@
-<script>
-	import { afterNavigate } from '$app/navigation';
+<script lang="ts">
+	import eventsData from '$lib/data/events.json';
 
-	// Event filters (events page only)
-	afterNavigate(() => {
-		const filters = document.querySelectorAll('.filter');
-		if (!filters.length) return;
-		filters.forEach((btn) => {
-			btn.addEventListener('click', () => {
-				filters.forEach((b) => b.classList.remove('on'));
-				btn.classList.add('on');
-				const f = btn.dataset.filter;
-				document.querySelectorAll('.match').forEach((m) => {
-					m.style.display = f === 'all' || m.dataset.game.split(' ').includes(f) ? '' : 'none';
-				});
-				// Hide week labels with no visible matches
-				document.querySelectorAll('.week-label').forEach((label) => {
-					let el = label.nextElementSibling,
-						any = false;
-					while (el && el.classList.contains('match')) {
-						if (el.style.display !== 'none') any = true;
-						el = el.nextElementSibling;
-					}
-					label.style.display = any ? '' : 'none';
-				});
-			});
-		});
+	interface EventItem {
+		id: string;
+		name: string;
+		description: string;
+		gameCode: string;
+		gameName: string;
+		isCommunity: boolean;
+		location: string;
+		startTime: string;
+		endTime: string | null;
+		dateDay: string;
+		dateMonth: string;
+		timeFormatted: string;
+		weekLabel: string;
+		tickerText: string;
+		discordUrl?: string;
+	}
+
+	let activeFilter = $state('all');
+
+	const filters = [
+		{ id: 'all', label: 'All' },
+		{ id: 'ow', label: 'Overwatch' },
+		{ id: 'val', label: 'Valorant' },
+		{ id: 'lol', label: 'League' },
+		{ id: 'rl', label: 'Rocket League' },
+		{ id: 'r6', label: 'R6 Siege' },
+		{ id: 'dbd', label: 'DBD' },
+		{ id: 'cs', label: 'CS2' },
+		{ id: 'dlk', label: 'DLK' },
+		{ id: 'mr', label: 'Rivals' },
+		{ id: 'comm', label: 'Community' }
+	];
+
+	// Filter events based on active category
+	let filteredEvents = $derived(
+		((eventsData?.events || []) as EventItem[]).filter((e) => {
+			if (activeFilter === 'all') return true;
+			if (activeFilter === 'comm') return e.isCommunity || e.gameCode === 'comm';
+			return e.gameCode === activeFilter;
+		})
+	);
+
+	// Group filtered events by weekLabel preserving chronological order
+	let groupedWeeks = $derived.by(() => {
+		const groups: Array<{ weekLabel: string; events: EventItem[] }> = [];
+		for (const event of filteredEvents) {
+			let group = groups.find((g) => g.weekLabel === event.weekLabel);
+			if (!group) {
+				group = { weekLabel: event.weekLabel, events: [] };
+				groups.push(group);
+			}
+			group.events.push(event);
+		}
+		return groups;
 	});
 </script>
+
+<svelte:head>
+	<title>Schedule &amp; Events - Esports at Oregon State University</title>
+	<meta
+		name="description"
+		content="Upcoming matches, tournaments, and community inhouses for Esports at Oregon State University."
+	/>
+</svelte:head>
 
 <main>
 	<div class="section" style="padding-top: 80px">
@@ -35,33 +74,49 @@
 			<h1 class="page-title" style="margin-bottom: 40px">Events &amp; matches</h1>
 
 			<div class="filters" role="group" aria-label="Filter events by game">
-				<button class="on filter" data-filter="all">All</button>
-				<button class="filter" data-filter="ow">Overwatch</button>
-				<button class="filter" data-filter="val">Valorant</button>
-				<button class="filter" data-filter="lol">League</button>
-				<button class="filter" data-filter="rl">Rocket League</button>
-				<button class="filter" data-filter="r6">R6 Siege</button>
-				<button class="filter" data-filter="dbd">DBD</button>
-				<button class="filter" data-filter="cs">CS2</button>
-				<button class="filter" data-filter="dlk">DLK</button>
-				<button class="filter" data-filter="comm">Community</button>
+				{#each filters as f (f.id)}
+					<button
+						class="filter {activeFilter === f.id ? 'on' : ''}"
+						onclick={() => (activeFilter = f.id)}
+					>
+						{f.label}
+					</button>
+				{/each}
 			</div>
 
-			<!--
-        USE class="match" for official events then class="match community" for club events
-        MATCH data-game to game or comm for community
-        ADD details - major in "vs" and minor in "sub" then time and location on the right
-        -->
-			<p class="week-label">Week of June 8</p>
-			<div class="match community" data-game="dlk">
-				<div class="date">Wed 10<small>June</small></div>
-				<div class="game-tag">Deadlock</div>
-				<div class="detail">
-					<p class="vs">Deadlock Inhouses</p>
-					<p class="sub"></p>
+			{#if groupedWeeks.length === 0}
+				<div class="empty-schedule">
+					<p>No upcoming events currently scheduled for this category.</p>
+					<a
+						class="btn btn-ghost"
+						href="https://discord.gg/eaosu"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						Join our Discord for announcements
+					</a>
 				</div>
-				<div class="time"><b>7:00 PM</b>Discord · Event Voice 1</div>
-			</div>
+			{:else}
+				{#each groupedWeeks as week (week.weekLabel)}
+					<p class="week-label">{week.weekLabel}</p>
+					{#each week.events as match (match.id)}
+						<div class="match {match.isCommunity ? 'community' : ''}" data-game={match.gameCode}>
+							<div class="date">{match.dateDay}<small>{match.dateMonth}</small></div>
+							<div class="game-tag">{match.gameName}</div>
+							<div class="detail">
+								<p class="vs">{match.name}</p>
+								{#if match.description}
+									<p class="sub">{match.description}</p>
+								{/if}
+							</div>
+							<div class="time">
+								<b>{match.timeFormatted}</b>
+								<span>{match.location}</span>
+							</div>
+						</div>
+					{/each}
+				{/each}
+			{/if}
 		</div>
 	</div>
 </main>

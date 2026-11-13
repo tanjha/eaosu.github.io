@@ -678,6 +678,21 @@ nav.menu {
 	}
 }
 
+.empty-schedule {
+	padding: 48px 24px;
+	background: var(--ink);
+	border: 1px dashed var(--line);
+	text-align: center;
+	margin: 20px 0 40px;
+}
+
+.empty-schedule p {
+	color: var(--sand);
+	font-family: var(--hud);
+	margin-bottom: 20px;
+	letter-spacing: 0.05em;
+}
+
 /* ============ TEAMS ============ */
 .teams-grid {
 	display: grid;

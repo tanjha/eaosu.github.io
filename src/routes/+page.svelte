@@ -1,5 +1,8 @@
 <script>
 	import Ticker from '../components/Ticker.svelte';
+	import eventsData from '$lib/data/events.json';
+
+	const nextEvent = eventsData?.events?.[0];
 </script>
 
 <svelte:head>
@@ -23,8 +26,15 @@
 			</div>
 			<div class="next-match reveal">
 				<p class="label">Next Event</p>
-				<p class="matchup">Run It Back - Sponsored by XFINITY</p>
-				<p class="meta">Date to be announced · Streamed live on Twitch</p>
+				{#if nextEvent}
+					<p class="matchup">{nextEvent.name}</p>
+					<p class="meta">
+						{nextEvent.dateDay} {nextEvent.dateMonth} · {nextEvent.timeFormatted} · {nextEvent.location}
+					</p>
+				{:else}
+					<p class="matchup">Run It Back - Sponsored by XFINITY</p>
+					<p class="meta">Date to be announced · Streamed live on Twitch</p>
+				{/if}
 			</div>
 		</div>
 	</div>
