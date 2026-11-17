@@ -67,6 +67,8 @@ interface OutputData {
 	events: ProcessedEvent[];
 }
 
+// Checked in order; the first match wins. More specific names must come before
+// patterns they contain (e.g. "Rocket League" before "League").
 const GAME_PATTERNS: Array<{
 	code: string;
 	name: string;
@@ -75,15 +77,23 @@ const GAME_PATTERNS: Array<{
 	{ code: 'dlk', name: 'Deadlock', pattern: /\b(deadlock|dlk)\b/i },
 	{ code: 'val', name: 'Valorant', pattern: /\b(valorant|val|cval)\b/i },
 	{ code: 'ow', name: 'Overwatch', pattern: /\b(overwatch|ow|ow2)\b/i },
-	{ code: 'lol', name: 'League', pattern: /\b(league(\s+of\s+legends)?|lol|tft|teamfight\s+tactics)\b/i },
 	{ code: 'rl', name: 'Rocket League', pattern: /\b(rocket\s+league|crl|rl)\b/i },
+	{
+		code: 'lol',
+		name: 'League',
+		// Lookbehind keeps "Rocket League" from counting as League of Legends
+		pattern: /(?<!rocket\s+)\b(league(\s+of\s+legends)?|lol|tft|teamfight\s+tactics)\b/i
+	},
 	{ code: 'r6', name: 'R6 Siege', pattern: /\b(rainbow\s+six(\s+siege)?|r6|siege)\b/i },
 	{ code: 'dbd', name: 'DBD', pattern: /\b(dead\s+by\s+daylight|dbd)\b/i },
 	{ code: 'cs', name: 'CS2', pattern: /\b(counter[\s-]?strike(\s*2)?|cs2|csgo|cs:go)\b/i },
 	{ code: 'mr', name: 'Marvel Rivals', pattern: /\b(marvel\s+rivals|rivals)\b/i }
 ];
 
-const COMMUNITY_PATTERN = /\b(inhouse|inhouses|casual|scrim|game\s*night|watch\s*party|social|meeting|general\s*meeting|tryouts?)\b/i;
+const COMMUNITY_GAME = { code: 'comm', name: 'Community' };
+
+const COMMUNITY_PATTERN =
+	/\b(inhouse|inhouses|casual|scrim|game\s*night|watch\s*party|social|meeting|general\s*meeting|tryouts?)\b/i;
 
 function getEnv(key: string): string | undefined {
 	return process.env[key];
@@ -103,14 +113,60 @@ async function readJsonIfExists(filePath: string): Promise<OutputData | null> {
 	}
 }
 
-function detectGame(title: string, description: string) {
-	const combined = `${title} ${description}`;
+type GameTag = { code: string; name: string };
+
+function matchGamePatterns(text: string): GameTag | null {
 	for (const game of GAME_PATTERNS) {
-		if (game.pattern.test(combined)) {
+		if (game.pattern.test(text)) {
 			return { code: game.code, name: game.name };
 		}
 	}
-	return { code: 'comm', name: 'Community' };
+	return null;
+}
+
+/**
+ * Resolves the text inside a `[ ... ]` override to a tag. Accepts a game code
+ * (`val`, `comm`), a display name (`Rocket League`, `Community`), or anything the
+ * game patterns recognize (`Rainbow Six`). Returns null for unrecognized text.
+ */
+function resolveOverride(value: string): GameTag | null {
+	const v = value.trim().replace(/\s+/g, ' ').toLowerCase();
+	if (v === COMMUNITY_GAME.code || v === COMMUNITY_GAME.name.toLowerCase()) {
+		return COMMUNITY_GAME;
+	}
+	const exact = GAME_PATTERNS.find((g) => g.code === v || g.name.toLowerCase() === v);
+	if (exact) return { code: exact.code, name: exact.name };
+	return matchGamePatterns(v);
+}
+
+// `[ tag ]` in an event description. Skips Markdown links (`[text](url)`).
+const OVERRIDE_PATTERN = /\[\s*([^[\]\n]{1,40}?)\s*\](?!\()/g;
+
+/**
+ * Finds the first recognized `[ GAME ]` override in a description. Returns the tag
+ * and the description with that override removed. Brackets that don't name a known
+ * game or `comm` are left in place and ignored.
+ */
+function extractOverride(description: string): { tag: GameTag | null; cleaned: string } {
+	for (const m of description.matchAll(OVERRIDE_PATTERN)) {
+		const tag = resolveOverride(m[1]);
+		if (tag) {
+			const cleaned = (description.slice(0, m.index) + description.slice(m.index! + m[0].length))
+				.replace(/[ \t]{2,}/g, ' ')
+				.replace(/^[ \t]+|[ \t]+$/gm, '')
+				.trim();
+			return { tag, cleaned };
+		}
+	}
+	return { tag: null, cleaned: description };
+}
+
+/**
+ * Picks the event's tag: a `[ GAME ]` override wins, then the title, then the
+ * description, and finally Community as the fallback.
+ */
+function detectGame(title: string, description: string): GameTag {
+	return matchGamePatterns(title) ?? matchGamePatterns(description) ?? COMMUNITY_GAME;
 }
 
 function getWeekMonday(date: Date, timeZone: string): Date {
@@ -398,15 +454,15 @@ async function main() {
 	}
 
 	// Sort chronologically across all expanded instances
-	allInstances.sort(
-		(a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime()
-	);
+	allInstances.sort((a, b) => new Date(a.startTime).getTime() - new Date(b.startTime).getTime());
 
 	const processedEvents: ProcessedEvent[] = allInstances.map((inst) => {
 		const ev = inst.event;
-		const game = detectGame(ev.name, ev.description || '');
+		const override = extractOverride(ev.description || '');
+		const description = override.cleaned;
+		const game = override.tag ?? detectGame(ev.name, description);
 		const isCommunity =
-			game.code === 'comm' || COMMUNITY_PATTERN.test(`${ev.name} ${ev.description || ''}`);
+			game.code === COMMUNITY_GAME.code || COMMUNITY_PATTERN.test(`${ev.name} ${description}`);
 		const dt = formatPacificDate(inst.startTime);
 		const location = resolveLocation(ev);
 		const tickerText = `${dt.tickerDay} — ${ev.name} — ${dt.timeFormatted}`;
@@ -415,7 +471,7 @@ async function main() {
 		return {
 			id: inst.instanceId,
 			name: ev.name,
-			description: ev.description || '',
+			description,
 			gameCode: game.code,
 			gameName: game.name,
 			isCommunity,

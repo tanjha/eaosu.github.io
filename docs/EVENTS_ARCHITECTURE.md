@@ -53,18 +53,19 @@ The ingestion script is a zero-dependency script designed to run natively on bot
 1. **API Ingestion**:
    - Queries `GET https://discord.com/api/v10/guilds/${DISCORD_GUILD_ID}/scheduled-events?with_user_count=true`.
    - Normalizes authorization headers (`Bot <token>`), gracefully handling tokens copied with or without the `Bot ` prefix and trimming whitespace.
-2. **Game Categorization (Keyword Matching)**:
-   - Matches title and description against regex patterns for club titles:
-     - **Overwatch (`ow`)**: `/\b(overwatch|ow|ow2)\b/i`
+2. **Game Categorization**:
+   - **Manual override (checked first)**: Put a tag in square brackets anywhere in the Discord event's description to set the game yourself, e.g. `[comm]`, `[ Community ]`, `[val]`, `[Rocket League]`, `[Rainbow Six]`. The text can be a game code, a display name, or anything the patterns below recognize; case and extra spaces don't matter. The first recognized tag wins and is removed from the description shown on the site. Brackets that don't name a known game (e.g. `[Round 1]`) and Markdown links (`[text](url)`) are left alone.
+   - **Automatic detection**: With no override, the **title** is checked first, then the description, against these patterns in order (first match wins):
+     - **Deadlock (`dlk`)**: `/\b(deadlock|dlk)\b/i`
      - **Valorant (`val`)**: `/\b(valorant|val|cval)\b/i`
-     - **League of Legends (`lol`)**: `/\b(league(\s+of\s+legends)?|lol|tft|teamfight\s+tactics)\b/i`
+     - **Overwatch (`ow`)**: `/\b(overwatch|ow|ow2)\b/i`
      - **Rocket League (`rl`)**: `/\b(rocket\s+league|crl|rl)\b/i`
+     - **League of Legends (`lol`)**: `/(?<!rocket\s+)\b(league(\s+of\s+legends)?|lol|tft|teamfight\s+tactics)\b/i` (won't match "Rocket League")
      - **Rainbow Six Siege (`r6`)**: `/\b(rainbow\s+six(\s+siege)?|r6|siege)\b/i`
      - **Dead by Daylight (`dbd`)**: `/\b(dead\s+by\s+daylight|dbd)\b/i`
      - **Counter-Strike 2 (`cs`)**: `/\b(counter[\s-]?strike(\s*2)?|cs2|csgo|cs:go)\b/i`
-     - **Deadlock (`dlk`)**: `/\b(deadlock|dlk)\b/i`
-     - **Marvel Rivals (`mr`)**: `/\b(marvel\s+rivals|rivals)\b/i` (safeguarded against single "Mr." false matches)
-     - **Community (`comm`)**: Fallback for non-title specific events.
+     - **Marvel Rivals (`mr`)**: `/\b(marvel\s+rivals|rivals)\b/i`
+     - **Community (`comm`)**: Fallback when nothing matches.
 3. **Format Detection (Community vs. Competitive)**:
    - Evaluates whether an event is a club/community event (e.g. inhouses, casual scrims, watch parties, game nights) or an official collegiate match, driving CSS presentation (`.match.community` vs `.match`).
 4. **Timezone & Date Normalization**:
