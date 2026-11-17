@@ -1,0 +1,41 @@
+{
+	"lastUpdated": "2026-11-17T05:17:17.536Z",
+	"coordinators": [
+		"squishsquid"
+	],
+	"competitions": [
+		"RiB",
+		"Platypus"
+	],
+	"blurb": [
+		"Blurb Paragraph 1",
+		"Blurb Paragraph 2",
+		"Blurb Paragraph 3"
+	],
+	"teams": [
+		{
+			"name": "Black - Varsity",
+			"members": [
+				{
+					"name": "Player1",
+					"type": "Player",
+					"rank": "Top_500",
+					"roles": [
+						"Tank",
+						"Damage"
+					],
+					"fact": "Placeholder Top 500 Overwatch player."
+				},
+				{
+					"name": "Player2",
+					"type": "Player",
+					"rank": "Champion",
+					"roles": [
+						"Support"
+					],
+					"fact": "Placeholder Champion Overwatch player."
+				}
+			]
+		}
+	]
+}

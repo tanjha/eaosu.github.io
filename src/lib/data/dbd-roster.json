@@ -1,0 +1,27 @@
+{
+	"lastUpdated": "2026-11-17T05:17:18.848Z",
+	"coordinators": [
+		"notawatermelon"
+	],
+	"competitions": [],
+	"blurb": [
+		"Blurb Paragraph 1",
+		"Blurb Paragraph 2",
+		"Blurb Paragraph 3"
+	],
+	"teams": [
+		{
+			"name": "Black - Varsity",
+			"members": [
+				{
+					"name": "Player1",
+					"type": "Player",
+					"rank": "Iridescent_1",
+					"secondaryRank": "Gold",
+					"roles": [],
+					"fact": "Placeholder DBD player with Killer & Survivor grades."
+				}
+			]
+		}
+	]
+}

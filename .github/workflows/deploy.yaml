@@ -37,6 +37,13 @@ jobs:
           DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
           DISCORD_GUILD_ID: ${{ secrets.DISCORD_GUILD_ID }}
 
+      # Fetches game roster tabs from the Google Sheet into src/lib/data/<game>-roster.json for this
+      # build only. If the URL is missing or the sheet can't be read, the committed JSON is kept.
+      - name: Sync rosters
+        run: deno run --no-lock --allow-net --allow-read --allow-write --allow-env scripts/sync-game-rosters.ts
+        env:
+          ROSTER_SHEET_URL: ${{ vars.ROSTER_SHEET_URL }}
+
       - name: build
         run: deno task build
 

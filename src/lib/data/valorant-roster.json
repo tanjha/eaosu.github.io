@@ -1,0 +1,208 @@
+{
+	"lastUpdated": "2026-11-17T05:17:15.216Z",
+	"coordinators": [
+		"teamkyr"
+	],
+	"competitions": [
+		"CVAL",
+		"CECC",
+		"RIB",
+		"PLATYPUS"
+	],
+	"blurb": [
+		"The Valorant program at Esports at Oregon State fields three rosters — Black (Varsity), Orange (JV), and White — competing in CVAL and regional collegiate events. Practices run throughout the week with team-specific schedules, and biweekly inhouses on Saturdays at 8:30 PM give the broader community a chance to play with the comp players.",
+		"Whether you're an Immortal-ranked grinder or someone looking to break into organized play for the first time, we have a spot for you. Tryouts open at the start of each fall term — keep an eye on the Discord announcements channel for signups and details.",
+		"Send any questions to your handsome and impressive Valorant Game Coordinator: @teamkyr on discord and bharadam@oregonstate.edu via email."
+	],
+	"teams": [
+		{
+			"name": "Black - Varsity",
+			"members": [
+				{
+					"name": "Marine",
+					"type": "Player",
+					"roles": [
+						"Initiator",
+						"Controller"
+					],
+					"fact": "Highest HS% in Run it Back 2025",
+					"rank": "Immortal_2"
+				},
+				{
+					"name": "B0SSCK",
+					"type": "Player",
+					"roles": [
+						"Duelist",
+						"Controller"
+					],
+					"fact": "Started on the Club Team.",
+					"rank": "Immortal_2"
+				},
+				{
+					"name": "Vize",
+					"type": "Player",
+					"roles": [
+						"Duelist",
+						"Initiator",
+						"Controller",
+						"Sentinel"
+					],
+					"fact": "It sounds like the agent but with a Z. Shotguns are W",
+					"rank": "Immortal_3"
+				},
+				{
+					"name": "Sae",
+					"type": "Player",
+					"roles": [
+						"Sentinel",
+						"Initiator"
+					],
+					"fact": "Refuses to play ranked",
+					"rank": "Ascendant_3"
+				},
+				{
+					"name": "Peptic",
+					"type": "Player",
+					"roles": [
+						"Initiator",
+						"Sentinel"
+					],
+					"fact": "This is his first year at OSU",
+					"rank": "Immortal_2"
+				},
+				{
+					"name": "Jin",
+					"type": "Sub",
+					"roles": [
+						"Duelist",
+						"Initiator"
+					],
+					"fact": "The Backup.",
+					"rank": "Immortal_2"
+				},
+				{
+					"name": "Zexsonn",
+					"type": "Coach",
+					"roles": [],
+					"fact": "Hit Immortal in Episode 1"
+				}
+			]
+		},
+		{
+			"name": "Orange - Junior Varsity",
+			"members": [
+				{
+					"name": "Proven",
+					"type": "Player",
+					"roles": [
+						"Initiator",
+						"Controller"
+					],
+					"fact": "Proved",
+					"rank": "Immortal_2"
+				},
+				{
+					"name": "Aether",
+					"type": "Player",
+					"roles": [
+						"Duelist",
+						"Controller"
+					],
+					"fact": "Twitch.tv/aetherval. be there or be square",
+					"rank": "Ascendant_3"
+				},
+				{
+					"name": "Froggeli",
+					"type": "Player",
+					"roles": [
+						"Initiator",
+						"Sentinel"
+					],
+					"fact": "\"heh..\"",
+					"rank": "Platinum_2"
+				},
+				{
+					"name": "tensi0n",
+					"type": "Player",
+					"roles": [
+						"Sentinel"
+					],
+					"fact": "Great aim no brain",
+					"rank": "Platinum_2"
+				},
+				{
+					"name": "Hanzz",
+					"type": "Player",
+					"roles": [
+						"Initiator"
+					],
+					"fact": "Definitely never queued comp and delayed an official...",
+					"rank": "Immortal_3"
+				},
+				{
+					"name": "Lyler",
+					"type": "Coach",
+					"roles": [],
+					"fact": ""
+				},
+				{
+					"name": "Uta",
+					"type": "AssistantCoach",
+					"roles": [],
+					"fact": ""
+				}
+			]
+		},
+		{
+			"name": "White - Club Development",
+			"members": [
+				{
+					"name": "B0SSCK",
+					"type": "Coach",
+					"roles": [],
+					"fact": "W Streamer"
+				},
+				{
+					"name": "Sundew",
+					"type": "Player",
+					"roles": [
+						"Duelist",
+						"Initiator"
+					],
+					"fact": "Mose",
+					"rank": "Immortal_3"
+				}
+			]
+		},
+		{
+			"name": "Sandstone - Club Development",
+			"members": [
+				{
+					"name": "Kyurem",
+					"type": "Coach",
+					"roles": [],
+					"fact": "He's so cool"
+				},
+				{
+					"name": "FlowBro",
+					"type": "Player",
+					"roles": [
+						"Duelist",
+						"Sentinel"
+					],
+					"fact": "BroSaveMEEEE",
+					"rank": "Gold_1"
+				},
+				{
+					"name": "Serenity",
+					"type": "Player",
+					"roles": [
+						"Initiator"
+					],
+					"fact": "Pavlovian Skye Birds",
+					"rank": "Platinum_1"
+				}
+			]
+		}
+	]
+}

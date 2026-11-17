@@ -1,0 +1,32 @@
+{
+	"lastUpdated": "2026-11-17T05:17:18.387Z",
+	"coordinators": [
+		"ariesdrags",
+		"defiantsnail"
+	],
+	"competitions": [
+		"Platypus"
+	],
+	"blurb": [
+		"Blurb Paragraph 1",
+		"Blurb Paragraph 2",
+		"Blurb Paragraph 3"
+	],
+	"teams": [
+		{
+			"name": "Black - Varsity",
+			"members": [
+				{
+					"name": "Player1",
+					"type": "Player",
+					"rank": "One_Above_All",
+					"roles": [
+						"Duelist",
+						"Vanguard"
+					],
+					"fact": "Placeholder fun fact about this Marvel Rivals player."
+				}
+			]
+		}
+	]
+}

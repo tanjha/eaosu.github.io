@@ -1,9 +1,21 @@
-﻿<svelte:head>
-	<title>Valorant — Esports at Oregon State University</title>
-	<!--<meta
-			name="description"
-			content="Meet the Valorant rosters at Esports at Oregon State University. Black, Orange, and White teams competing in CVAL."
-		/>-->
+<script lang="ts">
+	import Member from '../valorant/member.svelte';
+	import Team from '../valorant/team.svelte';
+	import rosterData from '$lib/data/rl-roster.json';
+	import Competitions from '../../../components/Competitions.svelte';
+	import SectionBlurb from '../../../components/SectionBlurb.svelte';
+	import type { ComponentProps } from 'svelte';
+
+	type MemberProps = ComponentProps<typeof Member>;
+	const roster = rosterData as {
+		competitions?: string[];
+		blurb?: string[];
+		teams: { name: string; members: MemberProps[] }[];
+	};
+</script>
+
+<svelte:head>
+	<title>Rocket League — Esports at Oregon State University</title>
 </svelte:head>
 
 <!-- Tryout Banner -->
@@ -24,19 +36,12 @@
 					<h1 class="page-title">Rocket League</h1>
 				</div>
 			</div>
-			<h2 class="kicker">Major Competitions:</h2>
-			<span class="league-tag">CRL</span>
-			<span class="league-tag">RiB</span>
-			<span class="league-tag">Platypus</span>
+			<Competitions competitions={roster.competitions} />
 		</div>
 	</div>
 
 	<!-- Info Section -->
-	<div class="section info-section">
-		<div class="wrap">
-			<p>Blurb</p>
-		</div>
-	</div>
+	<SectionBlurb paragraphs={roster.blurb} />
 
 	<!-- Player Card Grid -->
 	<div class="section player-grid-section">
@@ -44,44 +49,13 @@
 			<p class="kicker">Rosters</p>
 			<h2>Meet the Players</h2>
 
-			<!-- BLACK roster cards -->
-			<p class="roster-label" style="margin-top: 12px">Black - Varsity</p>
-			<div class="player-grid" style="margin-bottom: 48px">
-				<div class="player-card reveal">
-					<div class="player-photo"></div>
-					<div class="player-card-body">
-						<p class="pc-name">Player1</p>
-						<p class="pc-rank"><img src="" alt="rank" /> Rank</p>
-						<p class="pc-fact">Placeholder fun fact about this player.</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- ORANGE roster cards -->
-			<p class="roster-label">Orange - Junior Varsity</p>
-			<div class="player-grid" style="margin-bottom: 48px">
-				<div class="player-card reveal">
-					<div class="player-photo"></div>
-					<div class="player-card-body">
-						<p class="pc-name">Player1</p>
-						<p class="pc-rank"><img src="" alt="rank" /> Rank</p>
-						<p class="pc-fact">Placeholder fun fact about this player.</p>
-					</div>
-				</div>
-			</div>
-
-			<!-- WHITE roster cards -->
-			<p class="roster-label">White - Talent Development</p>
-			<div class="player-grid" style="margin-bottom: 48px">
-				<div class="player-card reveal">
-					<div class="player-photo"></div>
-					<div class="player-card-body">
-						<p class="pc-name">Player1</p>
-						<p class="pc-rank"><img src="" alt="rank" /> Rank</p>
-						<p class="pc-fact">Placeholder fun fact about this player.</p>
-					</div>
-				</div>
-			</div>
+			{#each roster.teams as team (team.name)}
+				<Team name={team.name}>
+					{#each team.members as member, i (i)}
+						<Member game="rl" {...member} />
+					{/each}
+				</Team>
+			{/each}
 		</div>
 	</div>
 
