@@ -1,0 +1,36 @@
+{
+	"lastUpdated": "2026-11-17T05:17:18.191Z",
+	"coordinators": [
+		"mango816"
+	],
+	"competitions": [
+		"RiB",
+		"Platypus"
+	],
+	"blurb": [
+		"Blurb Paragraph 1",
+		"Blurb Paragraph 2",
+		"Blurb Paragraph 3"
+	],
+	"teams": [
+		{
+			"name": "Black - Varsity",
+			"members": [
+				{
+					"name": "Player1",
+					"type": "Player",
+					"rank": "Level_10",
+					"roles": [],
+					"fact": "Placeholder fun fact about this CS2 player."
+				},
+				{
+					"name": "Player2",
+					"type": "Player",
+					"rank": "Challenger",
+					"roles": [],
+					"fact": "Placeholder Faceit Challenger CS2 player."
+				}
+			]
+		}
+	]
+}

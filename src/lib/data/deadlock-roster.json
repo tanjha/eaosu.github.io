@@ -1,0 +1,26 @@
+{
+	"lastUpdated": "2026-11-17T05:17:19.057Z",
+	"coordinators": [
+		"itisautumn"
+	],
+	"competitions": [],
+	"blurb": [
+		"Blurb Paragraph 1",
+		"Blurb Paragraph 2",
+		"Blurb Paragraph 3"
+	],
+	"teams": [
+		{
+			"name": "Black - Varsity",
+			"members": [
+				{
+					"name": "Player1",
+					"type": "Player",
+					"rank": "Eternus",
+					"roles": [],
+					"fact": "Placeholder fun fact about this Deadlock player."
+				}
+			]
+		}
+	]
+}

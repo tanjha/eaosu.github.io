@@ -1,3 +1,20 @@
+<script lang="ts">
+	import overwatchRoster from '$lib/data/overwatch-roster.json';
+	import valorantRoster from '$lib/data/valorant-roster.json';
+	import leagueRoster from '$lib/data/league-roster.json';
+	import rlRoster from '$lib/data/rl-roster.json';
+	import rainbowRoster from '$lib/data/rainbow-roster.json';
+	import dbdRoster from '$lib/data/dbd-roster.json';
+	import counterstrikeRoster from '$lib/data/counterstrike-roster.json';
+	import deadlockRoster from '$lib/data/deadlock-roster.json';
+	import rivalsRoster from '$lib/data/rivals-roster.json';
+
+	function formatCoords(coords?: string[]): string {
+		if (!coords || coords.length === 0) return '';
+		return coords.map((c) => (c.startsWith('@') ? c : `@${c}`)).join(' · ');
+	}
+</script>
+
 <svelte:head>
 	<title>Teams - Esports at Oregon State University</title>
 </svelte:head>
@@ -25,7 +42,7 @@
 								>
 							</div>
 							<div class="team-row">
-								<span class="k">Lead Discord</span><span class="v">@SquishySquid</span>
+								<span class="k">Lead Discord</span><span class="v">{formatCoords(overwatchRoster.coordinators)}</span>
 							</div>
 							<div class="team-row">
 								<span class="k">Inhouses</span><span class="v">Sat Biweekly · 5 PM</span>
@@ -57,7 +74,7 @@
 								>
 							</div>
 							<div class="team-row">
-								<span class="k">Lead Discord</span><span class="v">@teamkyr</span>
+								<span class="k">Lead Discord</span><span class="v">{formatCoords(valorantRoster.coordinators)}</span>
 							</div>
 							<div class="team-row">
 								<span class="k">Inhouses</span><span class="v">Sat Biweekly · 8:30</span>
@@ -87,7 +104,7 @@
 								<span class="k">Rosters</span><span class="v">Varsity · Junior Varisty</span>
 							</div>
 							<div class="team-row">
-								<span class="k">Lead Discord</span><span class="v">@Imaboos</span>
+								<span class="k">Lead Discord</span><span class="v">{formatCoords(leagueRoster.coordinators)}</span>
 							</div>
 							<div class="team-row">
 								<span class="k">Inhouses</span><span class="v">3rd Mon Monthly · 7 PM </span>
@@ -117,7 +134,7 @@
 								<span class="k">Rosters</span><span class="v">Varsity</span>
 							</div>
 							<div class="team-row">
-								<span class="k">Lead Discord</span><span class="v">@spooxsy</span>
+								<span class="k">Lead Discord</span><span class="v">{formatCoords(rlRoster.coordinators)}</span>
 							</div>
 							<div class="team-row"><span class="k">Inhouses</span><span class="v"></span></div>
 						</div>
@@ -145,7 +162,7 @@
 								<span class="k">Rosters</span><span class="v">Black · Orange</span>
 							</div>
 							<div class="team-row">
-								<span class="k">Lead Discord</span><span class="v">@par3d0x</span>
+								<span class="k">Lead Discord</span><span class="v">{formatCoords(rainbowRoster.coordinators)}</span>
 							</div>
 							<div class="team-row"><span class="k">Inhouses</span><span class="v"></span></div>
 						</div>
@@ -173,7 +190,7 @@
 								<span class="k">Format</span><span class="v">Varsity · Junior Varsity</span>
 							</div>
 							<div class="team-row">
-								<span class="k">Lead Discord</span><span class="v">@NotAWatermelon</span>
+								<span class="k">Lead Discord</span><span class="v">{formatCoords(dbdRoster.coordinators)}</span>
 							</div>
 							<div class="team-row">
 								<span class="k">Inhouses</span><span class="v">4th Thu Monthly · 7 PM</span>
@@ -203,7 +220,7 @@
 								<span class="k">Rosters</span><span class="v">Orange</span>
 							</div>
 							<div class="team-row">
-								<span class="k">Lead Discord</span><span class="v">@mango816</span>
+								<span class="k">Lead Discord</span><span class="v">{formatCoords(counterstrikeRoster.coordinators)}</span>
 							</div>
 							<div class="team-row">
 								<span class="k">Inhouses</span><span class="v">3rd Fri Monthly · 6 PM</span>
@@ -233,7 +250,7 @@
 								<span class="k">Rosters</span><span class="v">Orange</span>
 							</div>
 							<div class="team-row">
-								<span class="k">Lead Discord</span><span class="v">@itisautumn</span>
+								<span class="k">Lead Discord</span><span class="v">{formatCoords(deadlockRoster.coordinators)}</span>
 							</div>
 							<div class="team-row">
 								<span class="k">Inhouses</span><span class="v">Wed Biweekly · 7 PM</span>
@@ -263,7 +280,7 @@
 								<span class="k">Rosters</span><span class="v">Orange</span>
 							</div>
 							<div class="team-row">
-								<span class="k">Lead Discord</span><span class="v">@pressurechef</span>
+								<span class="k">Lead Discord</span><span class="v">{formatCoords(rivalsRoster.coordinators)}</span>
 							</div>
 							<div class="team-row"><span class="k">Inhouses</span><span class="v"></span></div>
 						</div>

@@ -998,6 +998,11 @@ footer {
 	background: var(--line);
 }
 
+/* first roster header directly under the section title */
+.player-grid-section h2 + .roster-label {
+	margin-top: 12px;
+}
+
 .roster-tier {
 	color: var(--sand);
 	font-weight: 500;
@@ -1145,8 +1150,17 @@ footer {
 }
 
 .player-card-body {
-	padding: 1em 1.2em 1.8em;
+	padding: 0 1.2em 1.8em;
 	position: relative;
+}
+
+.player-card-header {
+	padding: 1em 0 1.4em;
+	position: relative;
+}
+
+.player-card-header.no-roles {
+	padding-bottom: 0;
 }
 
 .player-card-body .pc-name {
@@ -1159,10 +1173,15 @@ footer {
 	display: flex;
 	align-items: center;
 	gap: 6px;
+	margin-top: 6px;
 	font: 100 0.8em/1 var(--hud);
 	letter-spacing: 0.12em;
 	text-transform: uppercase;
 	color: var(--sand);
+}
+
+.player-card-header.no-roles .pc-rank {
+	margin: 14px 0;
 }
 
 .player-card-body .pc-rank img {
@@ -1174,16 +1193,17 @@ footer {
 .player-card-body .pc-fact {
 	font: 500 0.7em/1.5 var(--hud);
 	color: var(--sand-deep);
-	margin-top: 2em;
+	margin-top: 0;
 	border-top: 1px dashed var(--line);
 	padding-top: 2em;
 }
 
-/* role icons — vertical column on right */
+/* role icons — vertical column on right, centered between orange line and dotted line */
 .pc-roles {
 	position: absolute;
-	top: 6px;
-	right: 14px;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
 	display: flex;
 	flex-direction: column;
 	align-items: center;

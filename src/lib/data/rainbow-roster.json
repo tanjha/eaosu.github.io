@@ -1,0 +1,29 @@
+{
+	"lastUpdated": "2026-11-17T05:17:18.628Z",
+	"coordinators": [
+		"b.dog34"
+	],
+	"competitions": [
+		"RiB",
+		"Platypus"
+	],
+	"blurb": [
+		"Blurb Paragraph 1",
+		"Blurb Paragraph 2",
+		"Blurb Paragraph 3"
+	],
+	"teams": [
+		{
+			"name": "Black - Varsity",
+			"members": [
+				{
+					"name": "Player1",
+					"type": "Player",
+					"rank": "Champion",
+					"roles": [],
+					"fact": "Placeholder Champion Rainbow Six Siege player."
+				}
+			]
+		}
+	]
+}
